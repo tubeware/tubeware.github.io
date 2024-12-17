@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Order</title>
+    <link rel="stylesheet" href="softstyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="software-page">
+
+        <!-- Header Section -->
+        <header class="soft-header fade-in">
+            <h1>Explore and Order <span class="highlight">Custom Software</span></h1>
+            <p>Your ideas, our solutions. Tell us what you need!</p>
+        </header>
+
+        <!-- Software List Section -->
+        <section class="software-list fade-in-delayed">
+            <h2>Available Software</h2>
+            <div class="software-grid">
+                <div class="software-item" style="background-image: url('img/software1.jpg');">
+                    <h3>Software 1</h3>
+                    <p>A powerful tool for task automation and efficiency.</p>
+                    <button class="cta-button" onclick="placeOrder('Software 1')">Order Now</button>
+                </div>
+                <div class="software-item" style="background-image: url('img/software2.jpg');">
+                    <h3>Software 2</h3>
+                    <p>Advanced analytics for smarter decisions.</p>
+                    <button class="cta-button" onclick="placeOrder('Software 2')">Order Now</button>
+                </div>
+                <div class="software-item" style="background-image: url('img/custom.jpg');">
+                    <h3>Custom</h3>
+                    <p>Need something specific? Let us build it for you.</p>
+                    <button class="cta-button" onclick="scrollToForm()">Request Custom</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Form Section -->
+        <section id="order-form" class="order-form fade-in-delayed">
+            <h2>Place Your Order</h2>
+            <form id="softOrderForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="software">Select Software:</label>
+                    <select id="software" name="software">
+                        <option value="Software 1">Software 1</option>
+                        <option value="Software 2">Software 2</option>
+                        <option value="Custom">Custom Software</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="details">Details (Optional):</label>
+                    <textarea id="details" name="details" rows="4"></textarea>
+                </div>
+                <button type="submit" class="cta-button">Submit Order</button>
+            </form>
+        </section>
+
+        <!-- Comment Section -->
+        <section id="comments" class="comments-section fade-in-delayed">
+            <h2>Customer Comments</h2>
+            <div id="softCommentList">
+                <!-- Comments will load dynamically -->
+                <p>No comments yet. Be the first to leave one!</p>
+            </div>
+            <form id="softCommentForm">
+                <h3>Leave a Comment</h3>
+                <div class="form-group">
+                    <label for="userComment">Your Comment:</label>
+                    <textarea id="userComment" name="userComment" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Submit Comment</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 My Software Hub. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="softscript.js"></script>
+</body>
+</html>
