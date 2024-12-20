@@ -3,56 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website Hub</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>IP Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            color: green;
+        }
+        #error {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <!-- Main Background (Parallax Effect) -->
-    <div class="parallax">
+    <h1>Test Backend Connectivity</h1>
+    <label for="ipAddress">Enter Backend IP (IPv4 or IPv6):</label><br>
+    <input type="text" id="ipAddress" placeholder="e.g., 110.227.24.31 or [2401:4900:54e8:1a6c::c28:953a]">
+    <button id="testButton">Test Connection</button>
 
-        <!-- Header Section -->
-        <header class="fade-in">
-            <h1>Welcome to <span class="glow">My Website Hub</span></h1>
-            <p>Explore, connect, and create with ease.</p>
-            <button onclick="scrollToSection('software')" class="cta-button">Explore Software</button>
-            <button onclick="scrollToSection('sound')" class="cta-button">Sound Systems</button>
-            <button onclick="scrollToSection('electronics')" class="cta-button">Electric Components</button>
-        </header>
+    <div id="result"></div>
+    <div id="error"></div>
 
-        <!-- Software Section -->
-        <section id="software" class="section fade-in-delayed" style="background-image: url('software-bg.jpg');">
-            <div class="section-content">
-                <h2>Software Solutions</h2>
-                <p>Explore the software tools I use to create and innovate.</p>
-                <button class="cta-button" onclick="window.location.href='soft.html'">Learn More</button>
-            </div>
-        </section>
-
-        <!-- Sound Systems Section -->
-        <section id="sound" class="section fade-in-delayed" style="background-image: url('sound-bg.jpg');">
-            <div class="section-content">
-                <h2>Sound Systems</h2>
-                <p>Discover the audio systems I work with and why they rock!</p>
-                <button class="cta-button" onclick="window.location.href=''">Learn More</button>
-            </div>
-        </section>
-
-        <!-- Electric Components Section -->
-        <section id="electronics" class="section fade-in-delayed" style="background-image: url('electronics-bg.jpg');">
-            <div class="section-content">
-                <h2>Electric Components</h2>
-                <p>Explore the components that power my projects.</p>
-                <button class="cta-button" onclick="window.location.href='hard/index.html'">Learn More</button>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 My Website Hub. Designed by pruthviraj patil.</p>
-        </footer>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
