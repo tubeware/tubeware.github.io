@@ -3,32 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP Connection Test</title>
+    <title>Lovely Desktop</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background: #000;
+            color: white;
+            overflow: hidden;
+        }
+
+        #liveWallpaper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.9);
+        }
+
+        #weatherWidget {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            width: 60%;
+            max-width: 600px;
             padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
         }
-        #result {
-            margin-top: 20px;
-            color: green;
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            font-size: 20px;
+            background: transparent;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-        #error {
-            margin-top: 20px;
-            color: red;
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .search-bar button {
+            background: linear-gradient(45deg, #ff8c00, #ff0080);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+        }
+
+        .search-bar button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff0080, #ff8c00);
+            box-shadow: 0 0 25px rgba(255, 140, 0, 1);
         }
     </style>
 </head>
 <body>
-    <h1>Test Backend Connectivity</h1>
-    <label for="ipAddress">Enter Backend IP (IPv4 or IPv6):</label><br>
-    <input type="text" id="ipAddress" placeholder="e.g., 110.227.24.31 or [2401:4900:54e8:1a6c::c28:953a]">
-    <button id="testButton">Test Connection</button>
 
-    <div id="result"></div>
-    <div id="error"></div>
+    <video id="liveWallpaper" autoplay loop muted>
+        <source src="https://cdn.pixabay.com/video/2019/05/22/23881-337972830_large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-    <script src="js/script.js"></script>
+    <div class="content">Welcome to Your Lovely Desktop!</div>
+
+    <div id="weatherWidget">
+        Loading weather...
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="googleSearch" placeholder="Search Google...">
+        <button onclick="searchGoogle()">Search</button>
+    </div>
+
+    <script>
+        const apiKey = '68d532d75d324a25ae9161401252101';
+        let defaultCity = 'New York';
+
+        async function getWeather(city = defaultCity) {
+            try {
+                const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
+                const data = await response.json();
+                const temp = data.current.temp_c;
+                const weatherDesc = data.current.condition.text;
+                updateWeatherWidget(temp, weatherDesc);
+                changeWallpaper(temp);
+            } catch (error) {
+                document.getElementById('weatherWidget').innerText = 'Error fetching weather!';
+            }
+        }
+
+        function updateWeatherWidget(temp, description) {
+            document.getElementById('weatherWidget').innerText = `Temp: ${temp}°C | ${description}`;
+        }
+
+        function changeWallpaper(temp) {
+            let wallpaperUrl = "";
+
+            if (temp > 37) {
+                wallpaperUrl = "https://cdn.pixabay.com/video/2023/06/30/169443-841382814_large.mp4"; // Blue Nature Theme
+            } else if (temp < 27) {
+                wallpaperUrl = "https://cdn.pixabay.com/video/2017/01/07/7141-198606872_large.mp4"; // Snowy/Cold Theme
+            } else {
+                wallpaperUrl = "https://cdn.pixabay.com/video/2019/05/22/23881-337972830_large.mp4"; // Flowerfall Theme
+            }
+
+            const videoElement = document.getElementById('liveWallpaper');
+            videoElement.src = wallpaperUrl;
+            videoElement.load();
+            videoElement.play();
+        }
+
+        function searchGoogle() {
+            let query = document.getElementById('googleSearch').value;
+            if (query) {
+                window.open(`https://www.google.com/search?q=${query}`, '_blank');
+            }
+        }
+
+        window.onload = () => getWeather();
+    </script>
+
 </body>
 </html>
